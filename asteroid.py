@@ -31,9 +31,6 @@ myFont = pygame.font.SysFont("arial", 30, True, False)
 clock = pygame.time.Clock()
 
 # 행성 충돌 방지 구역 (로켓의 위치와 행성이 겹쳐 생성되지 않도록 설정 )
-# SCREEN_WIDTH_N = random.choice(list(range(1,int(SCREEN_WIDTH/2/2))) + list(range(int(SCREEN_WIDTH/2) + int(SCREEN_WIDTH/2/2), SCREEN_WIDTH)))
-# SCREEN_HEIGHT_N = random.choice(list(range(1,int(SCREEN_HEIGHT/2/2))) + list(range(int(SCREEN_HEIGHT/2) + int(SCREEN_HEIGHT/2/2), SCREEN_HEIGHT)))
-
 #행성 위치
 loc_rock = []
 for i in range(5):
@@ -174,9 +171,8 @@ while True:
             vel.append([-rockVelocity,-rockVelocity])
             
         addRock_text = myFont.render("Rock +1", 1, (255,0,0))
-        screen.blit(addRock_text, [20, 20])
-        screen.blit(addRock_text, [20, 20])
-        screen.blit(addRock_text, [20, 20])
+        for i in range(10):
+            screen.blit(addRock_text, [20, 20])
     print(loc_rock)
     
     #속도 증가
@@ -193,9 +189,8 @@ while True:
         rockVelocity += 2
         
         SpeedUP_text = myFont.render("Speed UP!! ", 1, (255,0,0))
-        screen.blit(SpeedUP_text, [20, 20])
-        screen.blit(SpeedUP_text, [20, 20])
-        screen.blit(SpeedUP_text, [20, 20])
+        for i in range(10):
+            screen.blit(SpeedUP_text, [20, 20])
     print(vel)
     
     x = loc_ship[0] - img_width/2
@@ -210,15 +205,15 @@ while True:
     
     # 속도 표시
     currentVelocity_text = myFont.render("Speed: " + str(rockVelocity), 1, (255,255,255))
-    screen.blit(currentVelocity_text, [SCREEN_WIDTH-200, 20])
+    screen.blit(currentVelocity_text, [SCREEN_WIDTH-210, 20])
     
     #시간 표시
     timeDiff = str(round(time() - startTime,2))
     currentTime_text = myFont.render(timeDiff, 1, (255,255,255))
-    screen.blit(currentTime_text, [SCREEN_WIDTH-60, 20])
+    screen.blit(currentTime_text, [SCREEN_WIDTH-80, 20])
     
-    
+    #충돌 분석 함수 호출
     for i in range(totalRock):
         collision_check(loc_rock[i], size_rock, loc_ship, size_ship)
-
+        
     pygame.display.update() # 화면을 업데이트한다
